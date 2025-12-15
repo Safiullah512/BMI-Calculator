@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        h1{
+            margin: 20px;
+            font-size: 40px;
+        }
+        button{
+            margin: 30px;
+            padding: 10px;
+            border: none;
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0 0 8px #333;
+            transition: all ease;
+            cursor: pointer;
+        }
+        button:hover{
+            transform: scale(1.2);
+        }
+        img{
+            width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="light">
+        <h1>Light On/Off App</h1>
+        <img src="https://www.w3schools.com/js/pic_bulboff.gif">
+        <br>
+        <button>Turn On</button>
+    </div>
+</body>
+</html>
+<script>
+    let button=document.querySelector("button");
+    let img=document.querySelector("img");
+    button.addEventListener("click",function(){
+        if(button.textContent=="Turn On")
+        {
+            img.src="https://www.w3schools.com/js/pic_bulbon.gif";
+            button.style.backgroundColor="red";
+            button.textContent="Turn Off";
+        }
+        else{
+            img.src="https://www.w3schools.com/js/pic_bulboff.gif"
+            button.style.backgroundColor="green";
+            button.textContent="Turn On";
+        }
+    })
+</script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="write anythinng"/>
+    <h1>Characters Count : <span>0</span></h1>
+</body>
+<script>
+    let inp=document.querySelector("input");
+    let span=document.querySelector("span");
+    inp.addEventListener("input",function(){
+        let count=15 - inp.value.length;
+        span.innerText=count;
+        if(count<0)
+        {
+            span.style.color="red";
+        }
+        else
+        {
+            span.style.color="black";
+        }
+    })
+</script>
+</html>

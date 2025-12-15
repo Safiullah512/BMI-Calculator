@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: auto;
+            height: auto;
+        }
+        .area{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 40px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgb(31, 219, 31);
+            width: 400px;
+            height: auto;
+        }
+        input{
+            width: 300px;
+            padding: 10px;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        button{
+            padding: 15px;
+            background-color: green;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 8px black;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            margin-top: 10px;
+        }
+        button:hover{
+            transform: scale(1.1);
+        }
+        p{
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+        }
+        h1{
+            color: white;
+            margin-bottom: 15px;
+            font-size: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BMI Calculator</h1>
+        <div class="area">
+            <input type="number" class="weight" placeholder="Enter weight(kg)">
+            <input type="number" class="height" placeholder="Enter height (cm)">
+            <button>Calculate BMI</button>
+            <p>Your BMI:--</p>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let button=document.querySelector("button");
+    button.addEventListener("click",function(){
+        let height=document.querySelector(".height").value;
+        let weight=document.querySelector(".weight").value;
+        if(height==""||weight=="")
+        {
+            alert("Please Enter both values...");
+            return;
+        }
+
+        height=height/100;
+        let bmi=weight/(height*height);
+        let status="";
+
+        bmi=bmi.toFixed(2);
+        if(bmi<18.5)
+        {
+            status="Underweight";
+        }
+        else if(bmi>=18.5 && bmi<24.9)
+        {
+            status="Normal";
+        }
+        else if(bmi>=25 && bmi<29.9)
+        {
+            status="Overweignt";
+        }
+        else{
+            status="Obessed";
+        }
+        document.querySelector("p").textContent=`Your BMI : ${bmi} ${status}`;
+
+    });
+</script>

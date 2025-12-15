@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Turn Off the light and turn on the light</h2>
+    <!-- <button onclick="document.getElementById('bulb').src='Images/offlight.jpg'">Turn Off the light</button>
+    <img id="bulb" src="Images/offlight.jpg" style="width: 200px;">
+    <button onclick="document.getElementById('bulb').src='Images/onlight1.jpg'">Turn on the light</button> -->
+    <img id="bulb" src="Images/offlight.jpg" style="width: 200px;">
+    <button>Turn off or on the light</button>
+</body>
+<script>
+    let bulb=document.querySelector("#bulb");
+    let btn=document.querySelector("button");
+    let isOn=false;
+    btn.addEventListener("click",function(){
+        if(isOn){
+            bulb.src="Images/offlight.jpg";
+            isOn=false;
+        }
+        else{
+            bulb.src="Images/onlight1.jpg";
+            isOn=true;
+        }
+    })
+</script>
+</html>

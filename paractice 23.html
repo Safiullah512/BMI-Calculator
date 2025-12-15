@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            text-align: center;
+        }
+        .showBtn,.hideBtn{
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            font-weight: 500;
+            border: none;
+            transition: all 0.5s ease;
+        }
+        .showBtn:hover,.hideBtn:hover{
+            background-color: darkblue;
+            transform: scale(1.2);
+        }
+        .showBtn{
+            right: 200px;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+            border : 3px solid black;
+            text-align: center;
+            justify-content: center;
+            background-color: red;
+            border: 3px solid yellow;
+        }
+        .hidden{
+            display: none;
+        }
+        .fadeout{
+            opacity: 0;
+            transform: scale(0.8);
+        }
+    </style>
+</head>
+<body>
+    <button class="hideBtn">Hide Button</button>
+    <div class="container">
+        <div class="box">Box 1</div>
+        <div class="box">Box 2</div>
+        <div class="box">Box 3</div>
+        <div class="box">Box 4</div>
+        <div class="box">Box 5</div>
+    </div>
+    <button class="showBtn">Show Button</button>
+    <script>
+        let hideBtn=document.querySelector(".hideBtn");
+        let boxes=document.querySelectorAll(".box");
+        let showBtn=document.querySelector(".showBtn");
+        hideBtn.addEventListener("click",function(){
+            boxes.forEach(box => {
+                box.classList.add("fadeout");
+                setTimeout(()=>{
+                    box.classList.add("hidden");
+                },1000)
+            });
+            hideBtn.classList.add("hidden");
+            showBtn.classList.remove("hidden");
+        })
+        showBtn.addEventListener("click",function(){
+            boxes.forEach(box =>{
+                box.classList.remove("hidden");
+                setTimeout(()=>{
+                    box.classList.remove("fadeout");
+                },10)
+            })
+            showBtn.classList.add("hidden");
+            hideBtn.classList.remove("hidden");
+        })
+    </script>
+</body>
+</html>

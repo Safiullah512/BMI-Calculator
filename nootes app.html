@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .notes-container {
+            margin-top: 20px;
+        }
+
+        .note {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid blue;
+            position: relative;
+        }
+
+        .delete-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            cursor: pointer;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Notes App</h1>
+
+    <textarea placeholder="Write your note..."></textarea>
+    <button class="addBtn">Add Note</button>
+
+    <div class="notes-container"></div>
+
+
+    <script>
+        
+        let textarea = document.querySelector("textarea");
+        let addBtn = document.querySelector(".addBtn");
+        let notesContainer = document.querySelector(".notes-container");
+
+        // Load notes from localStorage on page load
+        window.onload = function () {
+            showNotes();
+        };
+
+        // Add note
+        addBtn.addEventListener("click", function () {
+            let noteText = textarea.value;
+
+            if (noteText.trim() === "") {
+                alert("Please enter a note!");
+                return;
+            }
+
+            let notes = JSON.parse(localStorage.getItem("notes")) || [];
+            notes.push(noteText);
+
+            localStorage.setItem("notes", JSON.stringify(notes));
+
+            textarea.value = "";
+
+            showNotes();
+        });
+
+        // Show all notes
+        function showNotes() {
+            notesContainer.innerHTML = "";
+
+            let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+            notes.forEach((note, index) => {
+                let div = document.createElement("div");
+                div.classList.add("note");
+
+                div.innerHTML = `
+            ${note}
+            <span class="delete-btn" onclick="deleteNote(${index})">X</span>`;
+
+                notesContainer.appendChild(div);
+            });
+        }
+
+        // Delete note
+        function deleteNote(index) {
+            let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+            notes.splice(index, 1);
+
+            localStorage.setItem("notes", JSON.stringify(notes));
+
+            showNotes();
+        };
+
+    </script>
+</body>
+
+</html>

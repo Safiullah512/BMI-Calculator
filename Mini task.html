@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li{
+            list-style: none;
+            background-color: lightblue;
+            padding: 10px;
+            position: relative;
+            width: 50%;
+        }
+        .delBtn{
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            color: yellow;
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 50%;
+            font-size: 12px;
+            background-color: red;
+            cursor: pointer;
+        }
+        .cmplBtn{
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            right: 50px;
+            color: green;
+        }
+        .active{
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <input placeholder="Enter name">
+    <button>Add</button>
+    <ul></ul>
+    <script>
+        let input=document.querySelector("input");
+        let button=document.querySelector("button")
+        let ul=document.querySelector("ul");
+        
+        button.addEventListener("click",function(){
+            let inputvalue=input.value.trim();
+            if(inputvalue===""){
+                alert("Plzz enter the name ");
+                return;
+            }
+            let li=document.createElement("li");
+            li.innerHTML=`
+            ${inputvalue}
+            <span class="delBtn">X</span>
+            <span class="cmplBtn">✔</span>
+            `
+            ul.appendChild(li);
+            input.value="";
+
+            let delBtn=li.querySelector(".delBtn");
+            delBtn.addEventListener("click",function(){
+            li.remove();
+            });
+
+            let cmplBtn=li.querySelector(".cmplBtn");
+            cmplBtn.addEventListener("click",function(){
+                li.classList.toggle("active");
+            });
+
+            
+        });
+
+        input.addEventListener("keydown",function(e){
+            if(e.key==="Enter"){
+                button.click();
+            }
+        });
+    </script>
+</body>
+</html>

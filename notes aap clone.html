@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            background-color: #f2f2ff;
+            padding: 20px;
+        }
+
+        textarea {
+            padding: 5px;
+            margin-top: 30px;
+            width: 100%;
+            /* display: flex; */
+            height: 100px;
+        }
+
+        h1 {
+            margin-top: 50px;
+        }
+
+        button {
+            width: 100px;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        .notes-container {
+            margin-top: 20px;
+        }
+
+        .notes {
+            border-left: 4px solid blue;
+            padding: 10px;
+            width: 100%;
+            background-color: white;
+            position: relative;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .deleteBtn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Notes App</h1>
+    <textarea placeholder="Write your note...."></textarea>
+    <button>Add Note</button>
+    <div class="notes-container"></div>
+
+
+
+    <script>
+        let textarea = document.querySelector("textarea");
+        let button = document.querySelector("button");
+        let notes_container = document.querySelector(".notes-container");
+
+        window.onload = function () {
+            showNotes();
+        };
+        button.addEventListener("click", function () {
+            let notes_text = textarea.value;
+            if (notes_text.trim() === "") {
+                alert("Please enter the text in text area");
+                return;
+            }
+            console.log("Why thir problem");
+            let notess = JSON.parse(localStorage.getItem("notess")) || [];
+            notess.push(notes_text);
+
+            localStorage.setItem("notess", JSON.stringify(notess));
+            textarea.value = "";
+            showNotes();
+
+        });
+        function showNotes() {
+            notes_container.innerHTML = "";
+            let notess = JSON.parse(localStorage.getItem("notess")) || [];
+            notess.forEach((note, index) => {
+                let div = document.createElement("div");
+                div.classList.add("notes");
+                div.innerHTML = `
+                ${note} 
+                <span class="deleteBtn" onclick="delNote(${index})">X</span>`;
+                notes_container.appendChild(div);
+            });
+
+        }
+        function delNote(i) {
+            let notess = JSON.parse(localStorage.getItem("notess"));
+            notess.splice(i, 1);
+            localStorage.setItem("notess", JSON.stringify(notess));
+            showNotes();
+
+        };
+
+        textarea.addEventListener("keydown",function(events){
+            if(events.key==="Enter"){
+                events.preventDefault();
+                button.click();
+            }
+        })
+
+    </script>
+</body>
+</html>

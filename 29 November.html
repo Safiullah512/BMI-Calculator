@@ -1,0 +1,191 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button>Click Me</button>
+
+    <p></p>
+    <script>
+        let button=document.querySelector("button");
+        let p=document.querySelector("p");
+
+        button.addEventListener("click",function(){
+            p.textContent="Hello Shafiq";
+        })
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            padding: 50px;
+        }
+        h1{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        input{
+            padding: 10px;
+            width: 80%;
+        }
+        button{
+            padding: 10px 15px;
+            margin-top: 5px;
+        }
+        ul{
+            margin-top: 20px;
+            list-style: none;
+        }
+        li{
+            margin-top: 10px;
+            width: 80%;
+            padding: 10px;
+            position: relative;
+            background-color: rgb(200, 239, 252);
+        }
+        .delBtn{
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-weight: bold;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: red;
+            cursor: pointer;
+        }
+        .editBtn{
+            position: absolute;
+            top: 10px;
+            right: 90px;
+            cursor: pointer;
+        }
+        .cmplBtn{
+            position: absolute;
+            top: 10px;
+            right: 170px;
+            cursor: pointer;
+        }
+        input.search{
+            padding: 10px;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List App</h1>
+    <input placeholder="Enter the task">
+    <input class="search" placeholder="Search nootes...">
+    <button>Add Task</button>
+    <ul></ul>
+
+    <script>
+        
+        let input=document.querySelector("input");
+        let button=document.querySelector("button");
+        let taskList=document.querySelector("ul");
+        let search=document.querySelector(".search");
+
+        window.onload=function(){
+            showTask();
+        }
+
+        button.onclick=addTask;
+
+        function addTask(){
+            let taskinput=input.value.trim();
+            if(taskinput===""){
+                alert("Plzz Enter a task");
+                return;
+            }
+
+            let nootes=JSON.parse(localStorage.getItem("nootes"))||[];
+            nootes.push({
+                text: taskinput,
+                completed:false
+            });
+            localStorage.setItem("nootes",JSON.stringify(nootes));
+            input.value="";
+            showTask();
+        }
+
+        function showTask(filterText=""){
+            taskList.innerHTML="";
+            let nootes=JSON.parse(localStorage.getItem("nootes"))||[];
+            let filtered=nootes.filter(t=>
+                t.text.toLowerCase().includes(filterText.toLowerCase())
+            );
+            filtered.forEach((note, index)=>{
+                let li=document.createElement("li")
+                li.innerHTML=`
+                <span style="text-decoration:${note.completed ? 'line-through':'none'}">
+                    ${note.text}
+                </span>
+                <span class="delBtn" onclick="delTask(${index})">X</span>
+                <span class="editBtn" onclick="editTask(${index})">Edit</span>
+                <span class="cmplBtn" onclick="cmplTask(${index})"><i class="fa-solid fa-check"></i></span>
+                `;
+                taskList.appendChild(li);
+            });
+        }
+
+        function delTask(i){
+            let nootes=JSON.parse(localStorage.getItem("nootes"))||[];
+            nootes.splice(i,1);
+            localStorage.setItem("nootes",JSON.stringify(nootes));
+            showTask();
+        }
+
+        function cmplTask(i){
+            let nootes=JSON.parse(localStorage.getItem("nootes"))||[];
+            nootes[i].completed=!nootes[i].completed;
+            localStorage.setItem("nootes",JSON.stringify(nootes));
+            showTask();
+        }
+
+        function editTask(i){
+            let nootes=JSON.parse(localStorage.getItem("nootes"))||[];
+            input.value=nootes[i].text ;
+            button.textContent="Update Task";
+
+            let newbutton=button.cloneNode(true);
+            button.parentElement.replaceChild(newbutton,button);
+            button=newbutton;
+
+            button.onclick=function(){
+                let nootesinput=input.value.trim();
+                if(nootesinput===""){
+                    alert("Plzzz enter the nootes");
+                    return;
+                }
+                nootes[i].text=nootesinput;
+                localStorage.setItem("nootes",JSON.stringify(nootes));
+                input.value="";
+                button.textContent="Add Task"
+                button.onclick=addTask;
+                showTask();
+            };
+            
+        }
+        search.oninput=function(){
+            showTask(search.value);
+        }
+    </script>
+</body>
+</html>

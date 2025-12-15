@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Color Generator</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: background-color 0.5s ease;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    h2 {
+      margin-top: 20px;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <button id="btn">Change Color 🎨</button>
+  <h2 id="colorCode">Background: rgb(255, 255, 255)</h2>
+
+  <script>
+    let btn = document.getElementById("btn");
+    let colorCode = document.getElementById("colorCode");
+
+    function randomColor() {
+      let r = Math.floor(Math.random() * 256);
+      let g = Math.floor(Math.random() * 256);
+      let b = Math.floor(Math.random() * 256);
+
+      let rgbColor = `rgb(${r}, ${g}, ${b})`;
+
+      document.body.style.backgroundColor = rgbColor;
+      colorCode.textContent = "Background: " + rgbColor;
+    }
+
+    btn.addEventListener("click", randomColor);
+  </script>
+</body>
+</html>

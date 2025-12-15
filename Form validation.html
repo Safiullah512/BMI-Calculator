@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #hide{
+            color: red;
+            font-size: 18px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input id="name" type="text" placeholder="Enter your name" maxlength="15"/>
+        <br><br>
+        <div id="hide">
+            <small id="small">Your name should be greater than 2 characters</small><br><br>
+        </div>
+        <input type="email" required placeholder="Enter your email"/>
+        <br><br>
+        <input type="password" placeholder="Enter your password" pattern="[0-9]{4,}" />
+        <br><br>
+        <select>
+            <option >Select your country</option>
+            <option >United States</option>
+            <option >Canada</option>
+            <option >United Kingdom</option>
+        </select>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+<script>
+    let nm=document.querySelector("#name");
+    let email=document.querySelector("input[type='email']");
+    let form=document.querySelector("form");
+    let hide=document.querySelector("#hide");
+    form.addEventListener("submit",function(dets){
+        dets.preventDefault();
+        // if(nm.value.length<=3)
+        // {
+        //     hide.style.display="initial";
+        // }
+        // else{
+        //     hide.style.display="none";
+        // }
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+        let ans=regex.test(email.value);
+        console.log(ans);
+
+        const username= /^[a-zA-Z0-9._-]{3,16}$/;
+        let name=username.test(nm.value);
+        console.log(name);
+
+
+    });
+</script>
+</html>

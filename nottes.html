@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 100px;
+            background-color: #f2f2f2;
+            margin-left: auto;
+        }
+        h1{
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        textarea{
+            width: 100%;
+            height: 100px;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+        button{
+            width: 100px;
+            margin-top: 10px;
+            padding: 15px 15px;
+        }
+        .classList{
+            margin-top: 25px;
+        }
+        .notes{
+            margin-top: 10px;
+            width: 100%;
+            padding: 20px;
+            background-color: white;
+            border-left: 4px solid blue;
+            position: relative;
+        }
+        .deleteBtn{
+            color: red;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-weight: bold;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            cursor: pointer;
+        }
+
+        .editBtn{
+            color: blue;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 100px;
+            font-weight: bold;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            cursor: pointer;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <h1>Notes App</h1>
+    <textarea placeholder="Write your note...."></textarea>
+    <button>Add Note</button>
+    <div class="classList"></div>
+
+    <script>
+        let textarea=document.querySelector("textarea");
+        let button=document.querySelector("button");
+        let container=document.querySelector(".classList");
+
+        window.onload=function(){
+            showtask();
+        }
+        button.onclick=addTask;
+
+        function addTask(){
+            let input=textarea.value;
+            if(input.trim()===""){
+                alert("Plz enter the task");
+                return;
+            }
+
+            let lists=JSON.parse(localStorage.getItem("lists"))||[];
+            lists.push(input);
+            localStorage.setItem("lists",JSON.stringify(lists));
+            textarea.value=""
+            showtask();
+        }
+
+        function showtask(){
+            container.innerHTML="";
+            let lists=JSON.parse(localStorage.getItem("lists"))||[];
+            lists.forEach((note,index)=>{
+                let div=document.createElement("div");
+                div.classList.add("notes");
+                div.innerHTML=`
+                ${note}
+                <span class=deleteBtn onclick="delBtn(${index}) ">X</span>
+                <span class=editBtn onclick="editTask(${index}) ">Edit</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function delBtn(i){
+            let lists=JSON.parse(localStorage.getItem("lists"))||[];
+            lists.splice(i,1);
+            localStorage.setItem("lists",JSON.stringify(lists));
+            showtask();
+        }
+
+        function editTask(i){
+            let lists=JSON.parse(localStorage.getItem("lists"))||[];
+            textarea.value=lists[i];
+            button.textContent="Update Notes";
+
+            let newbutton=button.cloneNode(true);
+            button.parentElement.replaceChild(newbutton,button);
+            button=newbutton;
+
+            button.onclick= function (){
+                let taskinput=textarea.value.trim();
+                if(taskinput===""){
+                    alert("Plzz enter a task");
+                    return;
+                }
+                lists[i]=taskinput;
+                localStorage.setItem("lists",JSON.stringify(lists));
+                textarea.value=""
+                button.textContent="Add Note";
+                button.onclick=addTask;
+                showtask();
+            }
+        }
+
+    </script>
+</body>
+</html>

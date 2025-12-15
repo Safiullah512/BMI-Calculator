@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hide Show Boxes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box {
+      padding: 10px;
+      margin: auto;
+      border: 3px solid yellow;
+      width: 100px;
+      height: 100px;
+      margin-top: 10px;
+      background-color: red;
+      transition: all 0.5s ease;
+      color: white;
+      text-align: center;
+      line-height: 100px;
+      font-weight: bold;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .fade-out {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+
+    .hideBtn,
+    .showBtn {
+      padding: 10px 20px;
+      background-color: blue;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.5s ease;
+      border-radius: 5px;
+      position: absolute;
+      top: 50px;
+    }
+
+    .hideBtn {
+      left: 200px;
+    }
+
+    .showBtn {
+      right: 200px;
+    }
+
+    .hideBtn:hover,
+    .showBtn:hover {
+      background-color: darkblue;
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+
+<body>
+  <button class="hideBtn">Hide Box</button>
+  <button class="showBtn hidden">Show Box</button>
+
+  <div class="container">
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+    <div class="box">Box 3</div>
+    <div class="box">Box 4</div>
+    <div class="box">Box 5</div>
+  </div>
+
+  <script>
+    let hideBtn = document.querySelector(".hideBtn");
+    let showBtn = document.querySelector(".showBtn");
+    let boxes = document.querySelectorAll(".box");
+
+    // HIDE BOX button functionality
+    hideBtn.addEventListener("click", function () {
+      boxes.forEach(box => {
+        box.classList.add("fade-out");
+        setTimeout(() => {
+          box.classList.add("hidden");
+        }, 500);
+      });
+      hideBtn.classList.add("hidden");
+      showBtn.classList.remove("hidden");
+    });
+
+    // SHOW BOX button functionality
+    showBtn.addEventListener("click", function () {
+      boxes.forEach(box => {
+        box.classList.remove("hidden");
+        setTimeout(() => {
+          box.classList.remove("fade-out");
+        }, 10);
+      });
+      hideBtn.classList.remove("hidden");
+      showBtn.classList.add("hidden");
+    });
+  </script>
+
+</body>
+
+</html>

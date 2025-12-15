@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fade In/Out Boxes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .box {
+      padding: 10px;
+      margin: auto;
+      border: 3px solid yellow;
+      width: 100px;
+      height: 100px;
+      margin-top: 10px;
+      background-color: red;
+      text-align: center;
+      color: white;
+      transition: all 0.6s ease; /* Smooth transition for animation */
+      opacity: 1; /* Fully visible */
+    }
+
+    /* Ye class fade-out (gayab) hone ke liye hai */
+    .fade-out {
+      opacity: 0;           /* Element transparent ho jaata hai */
+      transform: scale(0.8); /* Thoda chhota ho jaata hai for nice effect */
+    }
+
+    /* Jab fade-out ke baad display none karna ho */
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <button>Click me</button>
+  <div class="container">
+    <div class="box">box 1</div>
+    <div class="box">box 2</div>
+    <div class="box">box 3</div>
+    <div class="box">box 4</div>
+    <div class="box">box 5</div>
+  </div>
+</body>
+<script>
+  let button = document.querySelector("button");
+  let boxes = document.querySelectorAll(".box");
+  let hidden = false; // ye track karega ki boxes visible hain ya nahi
+
+  button.addEventListener("click", function () {
+    if (!hidden) {
+      // Pehle click → fade out animation
+      boxes.forEach(box => {
+        box.classList.add("fade-out");
+        setTimeout(() => {
+          box.classList.add("hidden"); // animation ke baad hide
+        }, 600); // same time as CSS transition
+      });
+      hidden = true;
+    } else {
+      // Dusra click → show again (fade-in)
+      boxes.forEach(box => {
+        box.classList.remove("hidden"); // display wapas laana
+        setTimeout(() => {
+          box.classList.remove("fade-out"); // fade-in effect
+        }, 100);
+      });
+      hidden = false;
+    }
+  });
+</script>
+</html>

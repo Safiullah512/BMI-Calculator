@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p></p>
+    <script>
+        /*let p=document.querySelector("p");
+        let num=Number(prompt("Enter the number"));
+        if(num%2==0){
+            console.log("Even");
+        }
+        else{
+            console.log("Odd");
+        }*/
+
+        //Reverse string
+        //method1
+        let name="Aftab";
+        let length=name.length;
+        let Reverse="";
+        for(let i=length-1;i>=0;i--){
+            Reverse+=name[i];
+        }
+        console.log(Reverse);
+
+        //method 2
+        let name1="Shafiq";
+        let Reverse1=name1.split("").reverse().join("");
+        console.log(Reverse1);
+
+        //method 3
+        let name2="Rafiq";
+        let Reverse2=[...name2].reverse().join("");
+        console.log(Reverse2);
+
+        //let n=prompt("Enter the name");
+
+        //palindrome
+        let name3="MAdam";
+        let lower=name3.toLowerCase();
+        let reversed1=lower.split("").reverse().join("");
+        if(lower===reversed1)
+        {
+            console.log(`${name3}: Is Palindrome ${reversed1}`);
+        }
+        else{
+            console.log(`${name3}: Is not Palindrome ${reversed1}`);
+        }
+
+        // palindrome 2
+
+        let name4="ullu";
+        let lower1=name4.toLowerCase();
+        let reversed2=[...lower1].reverse().join("");
+        console.log(reversed2);
+        if(lower1===reversed2){
+            console.log(`${name4} is Palindrome ${reversed2}`);
+        }
+        else{
+            console.log(`${name4} is not Palindrome ${reversed2}`);
+        }
+
+        let name5=" I love JavaScript";
+        let lower2=name5.toLowerCase();
+        let reversed3="";
+        for(let i=lower2.length-1;i>=0;i--)
+        {
+            reversed3+=lower2[i];
+        }
+        console.log(reversed3);
+        if(lower2===reversed3){
+            console.log(`${name5} is palindrome ${reversed3}`)
+        }
+        else{
+            console.log(`${name5} is not palindrome ${reversed3}`)
+        }
+
+        let name6="I love Javascript"
+        let reversed4=name6.split("").reverse().join("");
+        console.log(reversed4);
+
+        let name7="I love Javascript";
+        let words=name7.split("");
+        let reversedwords=words.reverse();
+        let reversedjoin=reversedwords.join("");
+        console.log(reversedjoin);
+
+        /*let num=prompt("Enter the number");
+        if(num%2==0){
+            console.log(`${num} is Even`);
+        }
+        else{
+            console.log(`${num} is Odd`);
+        }*/
+
+
+
+        //Question 2 reverse a string
+        let namee="Hello"
+        let reverse="";
+        for(let i=namee.length-1;i>=0;i--)
+        {
+            reverse+=namee[i];
+        }
+        console.log(reverse);
+
+        //question 3 return last element 
+        let arr=[10,20,30,40];
+        console.log(arr[3]);
+
+        //question 4 remove element at specific point 
+        
+
+    </script>10
+
+</body>
+</html>

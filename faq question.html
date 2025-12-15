@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        h1{
+            text-align: center;
+            padding: 30px 0;
+        }
+        .faq_question{
+            width: 100%;
+            margin: auto;
+            text-align: center;       
+        }
+
+        .faq_question 
+        .col{
+            margin:0px 400px;
+            cursor: pointer;
+            border: 1px solid gray;
+            margin-top: 15px;
+        }
+        .faq_question h3{
+            text-align: left;
+            padding: 10px 20px;
+            background-color: lightblue;
+            position: relative;
+            
+        }
+        .faq_question h3 span{
+            position: absolute;
+            right: 10px;
+            top: 3px;
+            font-weight: bold;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .faq_question p{
+            padding: 10px;
+            text-align: left;
+            display: none;
+            background-color: lightgoldenrodyellow;
+        }
+        .active{
+            display: block !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="faq_question">
+    <h1>Frequently asked questions</h1>
+        <div class="col">
+            <h3>Can FAQ pages help with voice search optimization?<span>+</span> </h3>
+            <p>FAQ pages use natural language and answer direct questions, making them ideal for voice assistants to pull concise responses to user queries. </p>
+        </div>
+        <div class="col">
+            <h3>What questions should I include on my FAQ page?  <span>+</span></h3>
+            <p>Include genuinely frequently asked questions from customer support, social media, sales teams, and product reviews. Focus on common concerns like order status, shipping, returns, and product details.</p>
+        </div>
+        <div class="col">
+            <h3>Can I integrate a chatbot into my FAQ page? <span>+</span></h3>
+            <p>IChatbots can provide instant, automated answers to common queries from your FAQ content, reducing support load and offering 24/7 assistance.</p>
+        </div>
+        <div class="col">
+            <h3>How often should I update my FAQ page? <span>+</span></h3>
+            <p>Update it whenever business changes occur, new products launch, or information becomes outdated. Auditing every three to six months is good practice to ensure accuracy and relevance.</p>
+        </div>
+    </div>
+    <script>
+        let col=document.querySelectorAll(".col h3");
+        col.forEach((item,index)=>{
+            item.addEventListener("click",function(){
+
+                col.forEach((heading,i)=>{
+                    if(index!=i){
+                        heading.lastElementChild.innerHTML="+";
+                        heading.nextElementSibling.classList.remove("active");
+                    }
+                })
+                item.nextElementSibling.classList.toggle("active");
+                if(item.lastElementChild.innerHTML=="+"){
+                    item.lastElementChild.innerHTML="-";
+                }
+                else{
+                    item.lastElementChild.innerHTML="+";
+                } 
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        body{
+            display:flex;
+            flex-direction:column;
+            height:100vh;
+            align-items:center;
+            justify-content:center;
+            background:#f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        .container{
+            background:white;
+            padding:20px;
+            width:350px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+        }
+        input{
+            width:100%;
+            padding:10px;
+            margin-bottom:10px;
+        }
+        button{
+            width:100%;
+            padding:10px;
+            background:black;
+            color:white;
+            cursor:pointer;
+            border-radius:5px;
+            border:none;
+        }
+        ul{
+            margin-top:15px;
+            list-style:none;
+        }
+        li{
+            background:#ddd;
+            padding:10px;
+            margin-top:5px;
+            display:flex;
+            justify-content:space-between;
+            border-radius:5px;
+        }
+        .delete{
+            background:red;
+            padding:5px;
+            color:white;
+            cursor:pointer;
+            border-radius:5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>To-Do List</h2>
+        <input type="text" class="taskInput" placeholder="Enter task...">
+        <button class="addBtn">Add Task</button>
+        <ul class="taskList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+    let taskInput = document.querySelector(".taskInput");
+let addBtn = document.querySelector(".addBtn");
+let taskList = document.querySelector(".taskList");
+
+addBtn.addEventListener("click", () => {
+    let task = taskInput.value;
+
+    if (task === "") {
+        alert("Please enter a task!");
+        return;
+    }
+
+    addTask(task);
+    taskInput.value = "";
+});
+
+function addTask(task) {
+    let li = document.createElement("li");
+    li.textContent = task;
+
+    // Delete button
+    let delBtn = document.createElement("span");
+    delBtn.textContent = "Delete";
+    delBtn.classList.add("delete");
+
+    delBtn.addEventListener("click", () => {
+        li.remove();
+    });
+
+    li.appendChild(delBtn);
+    taskList.appendChild(li);
+}
+
+</script>

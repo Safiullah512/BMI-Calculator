@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .container {
+            width: 350px;
+            height: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px #222;
+            background-color: aliceblue;
+            text-align: center;
+        }
+
+        input {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid black;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: black;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        ul {
+            margin-top: 15px;
+            list-style: none;
+        }
+
+        li {
+            width: 100%;
+            display: flex;
+            padding: 10px;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            border: 1px solid black;
+            margin-top: 5px;
+        }
+
+        .delete {
+            background-color: red;
+            padding: 5px;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>To - Do List</h1>
+        <input placeholder="Enter task.....">
+        <button>Add Task</button>
+        <ul class="taskList"></ul>
+    </div>
+</body>
+
+</html>
+<script>
+    let input=document.querySelector("input");
+    let button=document.querySelector("button");
+    let taskList=document.querySelector(".taskList");
+    button.addEventListener("click",function(){
+        let task=input.value;
+        if(task==""){
+            alert("Plz Enter the task");
+            return ;
+        }
+        addTask(task);
+        input.value="";
+    });
+    function addTask(task){
+        let li=document.createElement("li");
+        li.textContent=task;
+
+        let del=document.createElement("span");
+        del.textContent="Delete";
+        del.classList.add("delete");
+
+        del.addEventListener("click",()=>{
+            li.remove();
+        });
+
+        li.appendChild(del);
+        taskList.appendChild(li);   
+    };
+    input.addEventListener("keydown", function(event){
+        if(event.key==="Enter"){
+            button.click();
+        }
+    })
+</script>
